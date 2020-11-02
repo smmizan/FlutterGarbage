@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_desktop_ui_design/pages/data_store.dart';
 
 class InvoiceFormDesign extends StatefulWidget {
   @override
@@ -18,10 +19,47 @@ class _InvoiceFormDesignState extends State<InvoiceFormDesign> {
           child: Column(
             children: [
 
+              RaisedButton(
+                child: Text('Popup Dialog'),
+                onPressed: (){
+                  showAlertDialog(context);
+                },
+              )
+
             ],
           ),
         ),
       ),
     );
   }
+
+
+  showAlertDialog(BuildContext context){
+    showDialog(
+      context: context,
+      builder: (BuildContext context){
+        return AlertDialog(
+          title: Text('Color List'),
+          content: Container(
+            width: double.minPositive,
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: colorList.length,
+              itemBuilder: (context,index){
+                return ListTile(
+                  title: Text(colorList[index]),
+                  onTap: (){
+                    Navigator.pop(context,colorList[index]);
+                    print('${colorList[index]}');
+                  },
+                );
+
+              },
+            )
+          ),
+        );
+      }
+    );
+  }
+
 }

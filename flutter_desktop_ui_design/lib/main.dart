@@ -1,7 +1,4 @@
-import 'package:cross_local_storage/cross_local_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_desktop_app_frame/home_pages.dart';
-import 'package:flutter_desktop_app_frame/local_storage.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,9 +11,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+
         primarySwatch: Colors.blue,
       ),
-      home: MyLocalStorage(),
+      home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }

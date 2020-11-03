@@ -83,5 +83,32 @@ final List<Entry> data = <Entry>[
 
 
 
+class EntryItems extends StatelessWidget {
+
+  final Entry entry;
+  const EntryItems(this.entry);
+
+
+  Widget _buildTiles(Entry root){
+    if(root.children.isEmpty){
+      return ListTile(
+        title: Text(root.title),
+      )
+    }
+
+    return ExpansionTile(
+      key: PageStorageKey<Entry>(root),
+      title: Text(root.title),
+      children: root.children.map<Widget>(_buildTiles).toList(),
+    )
+
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
 
 

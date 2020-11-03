@@ -34,18 +34,18 @@ class Entry{
 
 final List<Entry> data = <Entry>[
   Entry(
-      'Section A',
+      'Animal',
       <Entry> [
-          Entry('Sub Section of A-1',
+          Entry('Cow',
             <Entry>[
-              Entry('Item A-1'),
-              Entry('Item A-2'),
-              Entry('Item A-3'),
+              Entry('Deshi Cow'),
+              Entry('Australian Cow'),
+              Entry('Denmark Cow'),
             ]
 
           ),
-        Entry('Sub Section of A-2'),
-        Entry('Sub Section of A-3'),
+        Entry('Horse'),
+        Entry('Cats'),
 
 
       ],
@@ -54,25 +54,26 @@ final List<Entry> data = <Entry>[
   ),
 
   Entry(
-      'Section B',
+      'Flowers',
         <Entry>[
-          Entry('Sub Section B-1'),
-          Entry('Sub Section B-2'),
+          Entry('Rose'),
+          Entry('Lili'),
+          Entry('Tulip'),
         ]
 
   ),
 
 
   Entry(
-    'Section C',
+    'Birds',
     <Entry>[
-      Entry('sub section c 0'),
-      Entry('sub section c 1'),
-      Entry('sub section c 2',
+      Entry('Doyel'),
+      Entry('Moyna'),
+      Entry('Love Birds',
         <Entry> [
-            Entry('child sub section c-2-1'),
-            Entry('child sub section c-2-2'),
-            Entry('child sub section c-2-3'),
+            Entry('budgerian'),
+            Entry('kaktaroa'),
+            Entry('hojoborolo'),
         ]
       ),
 

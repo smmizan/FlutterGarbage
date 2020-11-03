@@ -13,8 +13,8 @@ class _ExpandableListviewState extends State<ExpandableListview> {
         title: Text('Expandable Listview'),
       ),
       body: ListView.builder(
-        itemCount: data.length(),
-        itemBuilder: (context,index) => EntryItem(data[index]),
+        itemCount: data.length,
+        itemBuilder: (context,index) => EntryItems(data[index]),
       ),
     );
   }
@@ -93,21 +93,23 @@ class EntryItems extends StatelessWidget {
     if(root.children.isEmpty){
       return ListTile(
         title: Text(root.title),
-      )
+      );
     }
 
     return ExpansionTile(
       key: PageStorageKey<Entry>(root),
       title: Text(root.title),
       children: root.children.map<Widget>(_buildTiles).toList(),
-    )
+    );
 
   }
 
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return _buildTiles(
+      entry,
+    );
   }
 }
 

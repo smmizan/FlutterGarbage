@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_desktop_ui_design/pages/data_store.dart';
 import 'package:flutter_desktop_ui_design/widget/list_item_row.dart';
+import 'package:intl/intl.dart';
 
 class FormDesignOne extends StatefulWidget {
   @override
@@ -8,6 +9,29 @@ class FormDesignOne extends StatefulWidget {
 }
 
 class _FormDesignOneState extends State<FormDesignOne> {
+
+  TextEditingController _ctrlinvoiceDate,_ctrlStatus,_ctrlReceiveById,_ctrlReceiveByName;
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    String invoiceNumber = DateFormat('yyMMddhhmmss').format(DateTime.now());
+    print('${invoiceNumber}');
+
+    _ctrlinvoiceDate = new TextEditingController(text: '${DateFormat('dd-MM-yyyy').format(DateTime.now())}');
+    _ctrlStatus = new TextEditingController(text: 'N');
+    _ctrlReceiveById = new TextEditingController(text: '00000101');
+    _ctrlReceiveByName = new TextEditingController(text: 'Beacon Pharmaceuticals Limited');
+
+    print(_ctrlinvoiceDate.text);
+
+
+
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,6 +45,9 @@ class _FormDesignOneState extends State<FormDesignOne> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
+
+
+
 
               // Row 1 Receive Form & Feceive By
               Row(
@@ -53,7 +80,7 @@ class _FormDesignOneState extends State<FormDesignOne> {
                           SizedBox(width: 2,),
                           Expanded(
                             flex: 3,
-                            child: TextField(
+                            child: TextFormField(
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(),
                                 isDense: true,
@@ -82,7 +109,8 @@ class _FormDesignOneState extends State<FormDesignOne> {
                           ),
                           Expanded(
                             flex: 1,
-                            child: TextField(
+                            child: TextFormField(
+                              controller: _ctrlReceiveById,
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(),
                                 isDense: true,
@@ -93,7 +121,8 @@ class _FormDesignOneState extends State<FormDesignOne> {
                           SizedBox(width: 2,),
                           Expanded(
                             flex: 3,
-                            child: TextField(
+                            child: TextFormField(
+                              controller: _ctrlReceiveByName,
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(),
                                 isDense: true,
@@ -159,9 +188,9 @@ class _FormDesignOneState extends State<FormDesignOne> {
                                 SizedBox(width: 5,),
                                 Expanded(
                                   flex: 2,
-                                  child: TextField(
+                                  child: TextFormField(
+                                    controller: _ctrlinvoiceDate,
                                     decoration: InputDecoration(
-                                      labelText: 'invoice date',
                                       border: OutlineInputBorder(),
                                       isDense: true, // this field are customize height in a field
                                       contentPadding: EdgeInsets.all(8),
@@ -251,9 +280,9 @@ class _FormDesignOneState extends State<FormDesignOne> {
                                         ),
                                         Expanded(
                                             flex: 2,
-                                            child: TextField(
+                                            child: TextFormField(
+                                              controller: _ctrlStatus,
                                               decoration: InputDecoration(
-                                                labelText: 'status',
                                                 border: OutlineInputBorder(),
                                                 isDense: true,
                                                 contentPadding: EdgeInsets.all(8),
@@ -370,6 +399,29 @@ class _FormDesignOneState extends State<FormDesignOne> {
                     ),
                   ),
                 ],
+              ),
+
+
+              SizedBox(height: 10,),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Product Name',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold)),
+                Text('Box',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold)),
+                Text('Type',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold)),
+                Text('Benifit',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold)),
+                Text('Invoice',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold)),
+                Text('Bonus',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold)),
+                Text('Total Unit',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold)),
+                Text('MRP',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold)),
+                Text('TP',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold)),
+                Text('VAT',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold)),
+                Text('Buy Price',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold)),
+                Text('Discount',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold)),
+                Text('Total Values',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold)),
+              ],
+
               ),
 
             ],

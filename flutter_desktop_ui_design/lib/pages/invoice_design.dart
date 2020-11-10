@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_desktop_ui_design/pages/data_store.dart';
+import 'package:flutter_desktop_ui_design/widget/list_item_row.dart';
 
 class InvoiceFormDesign extends StatefulWidget {
   @override
@@ -23,6 +24,13 @@ class _InvoiceFormDesignState extends State<InvoiceFormDesign> {
                 child: Text('Popup Dialog'),
                 onPressed: (){
                   showAlertDialog(context);
+                },
+              ),
+
+              RaisedButton(
+                child: Text('Popup Pharmacy List'),
+                onPressed: (){
+                  showAlertDialog2(context);
                 },
               )
 
@@ -61,6 +69,26 @@ class _InvoiceFormDesignState extends State<InvoiceFormDesign> {
           ),
         );
       }
+    );
+  }
+
+  showAlertDialog2(BuildContext context){
+    showDialog(
+        context: context,
+        builder: (BuildContext context){
+          return AlertDialog(
+            title: Text('Pharma List'),
+            content: Container(
+                width: double.minPositive,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: listData.length,
+                  itemBuilder: (context,index) => ListItemRow(listData[index]),
+
+                )
+            ),
+          );
+        }
     );
   }
 

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_desktop_ui_design/dialogboxlistview/my_model.dart';
 import 'package:flutter_desktop_ui_design/pages/data_store.dart';
@@ -16,9 +17,16 @@ class _DialogBoxListViewState extends State<DialogBoxListView> {
         title: Text('List of Data'),
       ),
 
-      body: ListView(
-        children: listData.map((model) => ListItemRow(model)).toList(),
-      ),
+      body: ListView.builder(
+        itemCount: listData.length,
+        itemBuilder: (context,index) => ListItemRow(listData[index]),
+      )
+    );
+  }
+
+  ListView buildListViewListTile() {
+    return ListView(
+      children: listData.map((model) => ListItemRow(model)).toList(),
     );
   }
 }

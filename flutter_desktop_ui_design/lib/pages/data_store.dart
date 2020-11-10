@@ -7,5 +7,6 @@ List<String> colorList = ['Orange', 'Yellow', 'Pink','White', 'Red', 'Black', 'G
 List<Model> listData = [
   Model(id: 1,name: 'Rakib',address: 'Dhaka'),
   Model(id: 2,name: 'Korim',address: 'Sylhet'),
-  Model(id: 1,name: 'Ikram',address: 'Jamalpur')
+  Model(id: 3,name: 'Ikram',address: 'Jamalpur'),
+  Model(id: 4,name: 'Toslim',address: 'Rajshahi'),
 ];

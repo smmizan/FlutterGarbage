@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_desktop_ui_design/pages/data_store.dart';
+import 'package:flutter_desktop_ui_design/widget/list_item_row.dart';
 
 class FormDesignOne extends StatefulWidget {
   @override
@@ -35,11 +37,16 @@ class _FormDesignOneState extends State<FormDesignOne> {
                           ),
                           Expanded(
                             flex: 1,
-                            child: TextField(
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(),
-                                isDense: true, // this field are customize height in a field
-                                contentPadding: EdgeInsets.all(8),
+                            child: InkWell(
+                              onLongPress: (){
+                                showAlertDialog2(context);
+                              },
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  isDense: true, // this field are customize height in a field
+                                  contentPadding: EdgeInsets.all(8),
+                                ),
                               ),
                             ),
                           ),
@@ -371,4 +378,29 @@ class _FormDesignOneState extends State<FormDesignOne> {
       ),
     );
   }
+
+
+
+  showAlertDialog2(BuildContext context){
+    showDialog(
+        context: context,
+        builder: (BuildContext context){
+          return AlertDialog(
+            title: Text('Pharma List'),
+            content: Container(
+                width: double.minPositive,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: listData.length,
+                  itemBuilder: (context,index) => ListItemRow(listData[index]),
+
+                )
+            ),
+          );
+        }
+    );
+  }
+
+
+
 }

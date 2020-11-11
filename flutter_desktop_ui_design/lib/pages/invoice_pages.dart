@@ -4,12 +4,12 @@ import 'package:flutter_desktop_ui_design/widget/list_item_row.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as Http;
 
-class FormPages extends StatefulWidget {
+class InvoicePages extends StatefulWidget {
   @override
   _FormDesignOneState createState() => _FormDesignOneState();
 }
 
-class _FormDesignOneState extends State<FormPages> {
+class _FormDesignOneState extends State<InvoicePages> {
 
   TextEditingController _ctrlInvoiceNo,_ctrlinvoiceDate,_ctrlStatus,_ctrlReceiveById,_ctrlReceiveByName;
   TextEditingController _ctrlDTLproduct_code,_ctrlDTLproduct_quantity;
@@ -74,7 +74,7 @@ class _FormDesignOneState extends State<FormPages> {
       appBar: AppBar(
         elevation: 0,
         toolbarHeight: 40,
-        title: Text('Product Received'),
+        title: Text('Invoice'),
       ),
       body: Container(
         child: Padding(
@@ -83,9 +83,8 @@ class _FormDesignOneState extends State<FormPages> {
             children: [
 
 
+              // row 1
 
-
-              // Row 1 Receive Form & Feceive By
               Row(
                 children: [
                   Expanded(
@@ -96,57 +95,43 @@ class _FormDesignOneState extends State<FormPages> {
                           Expanded(
                               flex: 1,
                               child:
-                              Text('Received From',style: TextStyle(fontSize: 16),)
+                              Text('Customer',style: TextStyle(fontSize: 16),)
                           ),
                           Expanded(
-                            flex: 1,
-                            child: InkWell(
-                              onLongPress: (){
-                                showAlertDialog2(context);
-                              },
-                              child: TextField(
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  isDense: true, // this field are customize height in a field
-                                  contentPadding: EdgeInsets.all(8),
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: 2,),
-                          Expanded(
-                            flex: 3,
-                            child: TextFormField(
+                            flex: 2,
+                            child: TextField(
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(),
-                                isDense: true,
+                                isDense: true, // this field are customize height in a field
                                 contentPadding: EdgeInsets.all(8),
                               ),
                             ),
-                          )
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: TextField(
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                isDense: true, // this field are customize height in a field
+                                contentPadding: EdgeInsets.all(8),
+                              ),
+                            ),
+                          ),
 
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 10,),
-                  Expanded(
-                    flex: 2,
-                    child: Container(
-                      child: Row(
-                        children: [
+
                           Expanded(
-                              flex: 1,
-                              child:
-                              Padding(
-                                padding: const EdgeInsets.only(right: 10),
-                                child: Text('Received By',style: TextStyle(fontSize: 16,),textAlign: TextAlign.right,),
-                              )
+                            flex: 3,
+                            child: TextField(
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                isDense: true, // this field are customize height in a field
+                                contentPadding: EdgeInsets.all(8),
+                              ),
+                            ),
                           ),
                           Expanded(
-                            flex: 1,
-                            child: TextFormField(
-                              controller: _ctrlReceiveById,
+                            flex: 3,
+                            child: TextField(
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(),
                                 isDense: true,
@@ -154,11 +139,27 @@ class _FormDesignOneState extends State<FormPages> {
                               ),
                             ),
                           ),
-                          SizedBox(width: 2,),
+
                           Expanded(
-                            flex: 3,
-                            child: TextFormField(
-                              controller: _ctrlReceiveByName,
+                            flex: 2,
+                            child: TextField(
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                isDense: true,
+                                contentPadding: EdgeInsets.all(8),
+                              ),
+                            ),
+                          ),
+
+
+                          Expanded(
+                            flex: 1,
+                            child: Text('Mobile No',style: TextStyle(fontSize: 16),textAlign: TextAlign.center,),
+                          ),
+
+                          Expanded(
+                            flex: 2,
+                            child: TextField(
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(),
                                 isDense: true,
@@ -173,80 +174,15 @@ class _FormDesignOneState extends State<FormPages> {
                   ),
                 ],
               ),
-
-              // Row 2 Invoice & Credit
 
               SizedBox(height: 10,),
 
+
+              // row 2
+
+
               Row(
                 children: [
-                  // row 2 er invoice part | 1st part
-                  Expanded(
-                    flex: 2,
-                    child: Container(
-                      child: Row(
-                        children: [
-                          Expanded(
-                            flex: 2,
-                            child: Row(
-                              children: [
-                                Expanded(
-                                    flex: 1,
-                                    child:
-                                    Text('Invoice No',style: TextStyle(fontSize: 16),textAlign: TextAlign.right,)
-                                ),
-                                SizedBox(width: 10,),
-                                Expanded(
-                                  flex: 2,
-                                  child: TextFormField(
-                                    controller: _ctrlInvoiceNo,
-                                    decoration: InputDecoration(
-                                      border: OutlineInputBorder(),
-                                      isDense: true, // this field are customize height in a field
-                                      contentPadding: EdgeInsets.all(8),
-                                    ),
-                                  ),
-                                ),
-
-                              ],
-                            ),
-                          ),
-
-                          Expanded(
-                            flex: 2,
-                            child: Row(
-                              children: [
-                                Expanded(
-                                    flex: 1,
-                                    child:
-                                    Text('Invoice Date',style: TextStyle(fontSize: 16),textAlign: TextAlign.right,)
-                                ),
-                                SizedBox(width: 5,),
-                                Expanded(
-                                  flex: 2,
-                                  child: TextFormField(
-                                    controller: _ctrlinvoiceDate,
-                                    decoration: InputDecoration(
-                                      border: OutlineInputBorder(),
-                                      isDense: true, // this field are customize height in a field
-                                      contentPadding: EdgeInsets.all(8),
-                                    ),
-                                  ),
-                                ),
-
-                              ],
-                            ),
-                          ),
-
-                          SizedBox(width: 2,),
-
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 5,),
-
-                  // row 2 er credit part | 2nd part
                   Expanded(
                     flex: 2,
                     child: Container(
@@ -254,85 +190,84 @@ class _FormDesignOneState extends State<FormPages> {
                         children: [
                           Expanded(
                               flex: 1,
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    flex: 1,
-                                    child: Row(
-                                      children: [
-                                        Expanded(
-                                          flex: 1,
-                                          child: Text('Credit Days',style: TextStyle(fontSize: 14),),
-                                        ),
-                                        Expanded(
-                                            flex: 2,
-                                            child: TextField(
-                                              decoration: InputDecoration(
-                                                labelText: 'credit days',
-                                                border: OutlineInputBorder(),
-                                                isDense: true,
-                                                contentPadding: EdgeInsets.all(8),
-                                              ),
-                                            )
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 1,
-                                    child: Row(
-                                      children: [
-                                        Expanded(
-                                          flex: 1,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(5),
-                                            child: Text('Payment Date',style: TextStyle(fontSize: 14),textAlign: TextAlign.right,),
-                                          ),
-                                        ),
-                                        Expanded(
-                                            flex: 1,
-                                            child: TextFormField(
-                                              controller: _ctrlinvoiceDate,
-                                              decoration: InputDecoration(
-                                                //labelText: 'Payment date',
-                                                border: OutlineInputBorder(),
-                                                isDense: true,
-                                                contentPadding: EdgeInsets.all(8),
-                                              ),
-                                            )
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 1,
-                                    child: Row(
-                                      children: [
-                                        Expanded(
-                                          flex: 1,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(5.0),
-                                            child: Text('Status',style: TextStyle(fontSize: 15),textAlign: TextAlign.right,),
-                                          ),
-                                        ),
-                                        Expanded(
-                                            flex: 2,
-                                            child: TextFormField(
-                                              controller: _ctrlStatus,
-                                              decoration: InputDecoration(
-                                                border: OutlineInputBorder(),
-                                                isDense: true,
-                                                contentPadding: EdgeInsets.all(8),
-                                              ),
-                                            )
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ],
-
-                              )
+                              child:
+                              Text('Doctor',style: TextStyle(fontSize: 16),)
                           ),
+                          Expanded(
+                            flex: 2,
+                            child: TextField(
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                isDense: true, // this field are customize height in a field
+                                contentPadding: EdgeInsets.all(8),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: TextField(
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                isDense: true, // this field are customize height in a field
+                                contentPadding: EdgeInsets.all(8),
+                              ),
+                            ),
+                          ),
+
+
+                          Expanded(
+                            flex: 3,
+                            child: TextField(
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                isDense: true, // this field are customize height in a field
+                                contentPadding: EdgeInsets.all(8),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Text('Location',textAlign: TextAlign.right,),
+                          ),
+
+                          Expanded(
+                            flex: 1,
+                            child: TextField(
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                isDense: true,
+                                contentPadding: EdgeInsets.all(8),
+                              ),
+                            ),
+                          ),
+
+                          Expanded(
+                            flex: 2,
+                            child: TextField(
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                isDense: true,
+                                contentPadding: EdgeInsets.all(8),
+                              ),
+                            ),
+                          ),
+
+
+                          Expanded(
+                            flex: 1,
+                            child: Text('Time',style: TextStyle(fontSize: 16),textAlign: TextAlign.right,),
+                          ),
+
+                          Expanded(
+                            flex: 1,
+                            child: TextField(
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                isDense: true,
+                                contentPadding: EdgeInsets.all(8),
+                              ),
+                            ),
+                          )
 
                         ],
                       ),
@@ -341,9 +276,8 @@ class _FormDesignOneState extends State<FormPages> {
                 ],
               ),
 
-
+              SizedBox(height: 10,),
               // Row 3
-              SizedBox(height: 10,),
 
               Row(
                 children: [
@@ -368,12 +302,82 @@ class _FormDesignOneState extends State<FormPages> {
                             ),
                           ),
                           Expanded(
-                              flex: 1,
-                              child:
-                              Text('%',style: TextStyle(fontSize: 16),textAlign: TextAlign.center,)
+                            flex: 1,
+                            child: Text('%',style: TextStyle(fontSize: 16),textAlign: TextAlign.center,)
                           ),
+
+                          Expanded(
+                            flex: 2,
+                            child: TextField(
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                isDense: true, // this field are customize height in a field
+                                contentPadding: EdgeInsets.all(8),
+                              ),
+                            ),
+                          ),
+
                           Expanded(
                             flex: 4,
+                            child: TextField(
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                isDense: true, // this field are customize height in a field
+                                contentPadding: EdgeInsets.all(8),
+                              ),
+                            ),
+                          ),
+
+                          Expanded(
+                            flex: 1,
+                            child: Text('Bill No',textAlign: TextAlign.center,),
+                          ),
+
+                          Expanded(
+                            flex: 2,
+                            child: TextField(
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                isDense: true,
+                                contentPadding: EdgeInsets.all(8),
+                              ),
+                            ),
+                          ),
+
+                          Expanded(
+                            flex: 1,
+                            child: Text('Date',textAlign: TextAlign.center,),
+                          ),
+
+                          Expanded(
+                            flex: 2,
+                            child: TextField(
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                isDense: true,
+                                contentPadding: EdgeInsets.all(8),
+                              ),
+                            ),
+                          ),
+
+
+                          Expanded(
+                            flex: 1,
+                            child: Text('Status',style: TextStyle(fontSize: 16),textAlign: TextAlign.right,),
+                          ),
+
+                          Expanded(
+                            flex: 1,
+                            child: TextField(
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                isDense: true,
+                                contentPadding: EdgeInsets.all(8),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 2,
                             child: TextField(
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(),
@@ -387,60 +391,9 @@ class _FormDesignOneState extends State<FormPages> {
                       ),
                     ),
                   ),
-                  SizedBox(width: 10,),
-                  Expanded(
-                    flex: 2,
-                    child: Container(
-                      child: Row(
-                        children: [
-                          Expanded(
-                              flex: 1,
-                              child:
-                              Padding(
-                                padding: const EdgeInsets.only(right: 10),
-                                child: Text('No',style: TextStyle(fontSize: 16,)),
-                              )
-                          ),
-                          Expanded(
-                            flex: 3,
-                            child: TextField(
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(),
-                                isDense: true,
-                                contentPadding: EdgeInsets.all(8),
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: 2,),
-                          Expanded(
-                              flex: 1,
-                              child:
-                              Padding(
-                                padding: const EdgeInsets.only(right: 10),
-                                child: Text('Receive Date',style: TextStyle(fontSize: 16,),textAlign: TextAlign.right,),
-                              )
-                          ),
-                          Expanded(
-                            flex: 1,
-                            child: TextFormField(
-                              controller: _ctrlinvoiceDate,
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(),
-                                isDense: true,
-                                contentPadding: EdgeInsets.all(8),
-                              ),
-                            ),
-                          ),
-
-                        ],
-                      ),
-                    ),
-                  ),
                 ],
               ),
 
-
-              SizedBox(height: 10,),
 
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -460,7 +413,8 @@ class _FormDesignOneState extends State<FormPages> {
             SizedBox(height: 10,),
 
             SizedBox(height: 10,),
-              Container(
+
+            Container(
                 //color: Colors.black,
                 padding: EdgeInsets.all(2.0),
                 child: Table(
@@ -469,21 +423,21 @@ class _FormDesignOneState extends State<FormPages> {
 
                     TableRow(
                         children: [
-                      Text('Product Code',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
-                      Text('Product Name',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
-                      Text('Box',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
-                      Text('Type',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
-                      Text('Benifit',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
-                      Text('Invoice',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
-                      Text('Bonus',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
-                      Text('Total Unit',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
-                      Text('MRP',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
-                      Text('TP',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
-                      Text('VAT',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
-                      Text('Buy Price',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
-                      Text('Discount',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
-                      Text('Total Values',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
-                    ]),
+                          Text('Product Code',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
+                          Text('Product Name',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
+                          Text('Box',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
+                          Text('Type',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
+                          Text('Benifit',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
+                          Text('Invoice',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
+                          Text('Bonus',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
+                          Text('Total Unit',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
+                          Text('MRP',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
+                          Text('TP',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
+                          Text('VAT',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
+                          Text('Buy Price',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
+                          Text('Discount',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
+                          Text('Total Values',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
+                        ]),
 
 
 

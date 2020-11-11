@@ -4,6 +4,7 @@ import 'package:flutter_desktop_ui_design/expandablelist/expandable_listview.dar
 import 'package:flutter_desktop_ui_design/pages/form_design.dart';
 import 'package:flutter_desktop_ui_design/pages/form_pages.dart';
 import 'package:flutter_desktop_ui_design/pages/invoice_design.dart';
+import 'package:flutter_desktop_ui_design/pages/invoice_pages.dart';
 
 class HomePages extends StatefulWidget {
   @override
@@ -59,6 +60,18 @@ class _HomePagesState extends State<HomePages> {
               onTap: (){
                 Navigator.push(context, MaterialPageRoute(
                   builder: (context) => FormPages(),
+                ));
+              },
+            ),
+
+
+
+            ListTile(
+              leading: Icon(Icons.home_outlined),
+              title: Text('Invoice'),
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) => InvoicePages(),
                 ));
               },
             ),

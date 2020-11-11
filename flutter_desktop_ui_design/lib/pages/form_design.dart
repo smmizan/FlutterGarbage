@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_desktop_ui_design/pages/data_store.dart';
 import 'package:flutter_desktop_ui_design/widget/list_item_row.dart';
 import 'package:intl/intl.dart';
+import 'package:http/http.dart' as Http;
 
 class FormDesignOne extends StatefulWidget {
   @override
@@ -10,24 +11,59 @@ class FormDesignOne extends StatefulWidget {
 
 class _FormDesignOneState extends State<FormDesignOne> {
 
-  TextEditingController _ctrlinvoiceDate,_ctrlStatus,_ctrlReceiveById,_ctrlReceiveByName;
+  TextEditingController _ctrlInvoiceNo,_ctrlinvoiceDate,_ctrlStatus,_ctrlReceiveById,_ctrlReceiveByName;
+  TextEditingController _ctrlDTLproduct_code,_ctrlDTLproduct_quantity;
 
+  var _invoiceNo;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    String invoiceNumber = DateFormat('yyMMddhhmmss').format(DateTime.now());
-    print('${invoiceNumber}');
+    _invoiceNo = DateFormat('yyMMddhhmmss').format(DateTime.now());
+    print('${_invoiceNo}');
 
+    _ctrlInvoiceNo = new TextEditingController(text: _invoiceNo);
     _ctrlinvoiceDate = new TextEditingController(text: '${DateFormat('dd-MM-yyyy').format(DateTime.now())}');
     _ctrlStatus = new TextEditingController(text: 'N');
     _ctrlReceiveById = new TextEditingController(text: '00000101');
     _ctrlReceiveByName = new TextEditingController(text: 'Beacon Pharmaceuticals Limited');
 
+    _ctrlDTLproduct_code = new TextEditingController();
+    _ctrlDTLproduct_quantity = new TextEditingController();
+
+
     print(_ctrlinvoiceDate.text);
 
 
+
+  }
+
+
+
+
+  Future<List> masterInsert() async{
+    final myUrl =  "http://localhost/Mizan/flutter/pharmacy/master_insert.php";
+    var body = {
+      "invoice_no":_ctrlInvoiceNo.text,
+      "receive_from_id":_ctrlReceiveById.text,
+      "invoice_date":_ctrlinvoiceDate.text,
+    };
+    var mizan = await Http.post(myUrl,body: body);
+    print(mizan.body);
+    
+  }
+
+
+  Future<List> detailInsert() async{
+    final myUrl =  "http://localhost/Mizan/flutter/pharmacy/details_insert.php";
+    var body = {
+      "invoice_no":_ctrlInvoiceNo.text,
+      "product_code":_ctrlDTLproduct_code.text,
+      "product_quantiry":_ctrlDTLproduct_quantity.text,
+    };
+    var mizan = await Http.post(myUrl,body: body);
+    print(mizan.body);
 
   }
 
@@ -162,9 +198,9 @@ class _FormDesignOneState extends State<FormDesignOne> {
                                 SizedBox(width: 10,),
                                 Expanded(
                                   flex: 2,
-                                  child: TextField(
+                                  child: TextFormField(
+                                    controller: _ctrlInvoiceNo,
                                     decoration: InputDecoration(
-                                      labelText: 'invoice no',
                                       border: OutlineInputBorder(),
                                       isDense: true, // this field are customize height in a field
                                       contentPadding: EdgeInsets.all(8),
@@ -255,9 +291,10 @@ class _FormDesignOneState extends State<FormDesignOne> {
                                         ),
                                         Expanded(
                                             flex: 1,
-                                            child: TextField(
+                                            child: TextFormField(
+                                              controller: _ctrlinvoiceDate,
                                               decoration: InputDecoration(
-                                                labelText: 'Payment date',
+                                                //labelText: 'Payment date',
                                                 border: OutlineInputBorder(),
                                                 isDense: true,
                                                 contentPadding: EdgeInsets.all(8),
@@ -385,7 +422,8 @@ class _FormDesignOneState extends State<FormDesignOne> {
                           ),
                           Expanded(
                             flex: 1,
-                            child: TextField(
+                            child: TextFormField(
+                              controller: _ctrlinvoiceDate,
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(),
                                 isDense: true,
@@ -407,6 +445,15 @@ class _FormDesignOneState extends State<FormDesignOne> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                FlatButton(
+                  child: Text('Master Insert',style: TextStyle(color: Colors.red,fontSize: 20),),
+                  onPressed: (){
+                    masterInsert();
+                    //print('master insert : ${_ctrlInvoiceNo.text},${_ctrlinvoiceDate.text},${_ctrlReceiveById.text}');
+                  },
+                ),
+
+
                 Text('Product Name',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold)),
                 Text('Box',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold)),
                 Text('Type',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold)),
@@ -420,8 +467,107 @@ class _FormDesignOneState extends State<FormDesignOne> {
                 Text('Buy Price',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold)),
                 Text('Discount',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold)),
                 Text('Total Values',style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold)),
-              ],
 
+              ]
+            ),
+
+
+              // Details Part
+              SizedBox(height: 10,),
+
+              Row(
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: Container(
+                      child: Row(
+                        children: [
+                          Expanded(
+                              flex: 1,
+                              child:
+                              Text('Product Code',style: TextStyle(fontSize: 16),)
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: TextFormField(
+                              controller: _ctrlDTLproduct_code,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                isDense: true, // this field are customize height in a field
+                                contentPadding: EdgeInsets.all(8),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                              flex: 1,
+                              child:
+                              Text('No Of Quantity',style: TextStyle(fontSize: 16),textAlign: TextAlign.center,)
+                          ),
+                          Expanded(
+                            flex: 4,
+                            child: TextFormField(
+                              controller: _ctrlDTLproduct_quantity,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                isDense: true,
+                                contentPadding: EdgeInsets.all(8),
+                              ),
+                            ),
+                          )
+
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 10,),
+                  Expanded(
+                    flex: 2,
+                    child: Container(
+                      child: Row(
+                        children: [
+                          Expanded(
+                              flex: 1,
+                              child:
+                              Padding(
+                                padding: const EdgeInsets.only(right: 10),
+                                child: Text('No',style: TextStyle(fontSize: 16,)),
+                              )
+                          ),
+                          Expanded(
+                            flex: 3,
+                            child: TextField(
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                isDense: true,
+                                contentPadding: EdgeInsets.all(8),
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 2,),
+                          Expanded(
+                              flex: 1,
+                              child:
+                              Padding(
+                                padding: const EdgeInsets.only(right: 10),
+                                child: Text('Receive Date',style: TextStyle(fontSize: 16,),textAlign: TextAlign.right,),
+                              )
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: FlatButton(
+                              child: Text('Details Table insert',style: TextStyle(color: Colors.red),),
+                              onPressed: (){
+                                detailInsert();
+                                  //print('details table insert : ${_ctrlInvoiceNo.text},${_ctrlDTLproduct_code.text},${_ctrlDTLproduct_quantity.text}');
+                              },
+                            )
+                            )
+
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
 
             ],

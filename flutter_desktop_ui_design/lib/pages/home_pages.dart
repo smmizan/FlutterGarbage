@@ -37,7 +37,20 @@ class _HomePagesState extends State<HomePages> {
                   color: Colors.blue,
                 ),
               ),
-            ),  
+            ),
+
+            ListTile(
+              leading: Icon(Icons.home_outlined),
+              title: Text('Receive'),
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) => ExpandableListview(),
+                ));
+              },
+            ),
+
+
+
             ListTile(
               leading: Icon(Icons.home_outlined),
               title: Text('Home'),

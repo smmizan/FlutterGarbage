@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_desktop_ui_design/dialogboxlistview/dialogbox_listview.dart';
 import 'package:flutter_desktop_ui_design/expandablelist/expandable_listview.dart';
 import 'package:flutter_desktop_ui_design/pages/form_design.dart';
+import 'package:flutter_desktop_ui_design/pages/form_pages.dart';
 import 'package:flutter_desktop_ui_design/pages/invoice_design.dart';
 
 class HomePages extends StatefulWidget {
@@ -39,16 +40,6 @@ class _HomePagesState extends State<HomePages> {
               ),
             ),
 
-            ListTile(
-              leading: Icon(Icons.home_outlined),
-              title: Text('Receive'),
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(
-                  builder: (context) => ExpandableListview(),
-                ));
-              },
-            ),
-
 
 
             ListTile(
@@ -57,6 +48,17 @@ class _HomePagesState extends State<HomePages> {
               onTap: (){
                 Navigator.push(context, MaterialPageRoute(
                   builder: (context) => ExpandableListview(),
+                ));
+              },
+            ),
+
+
+            ListTile(
+              leading: Icon(Icons.home_outlined),
+              title: Text('Receive'),
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) => FormPages(),
                 ));
               },
             ),
